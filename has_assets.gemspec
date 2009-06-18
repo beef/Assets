@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
      "app/views/admin/assets/select_thumbnail.js.rjs",
      "app/views/admin/assets/show.html.erb",
      "app/views/admin/assets/show.js.rjs",
+     "config/routes.rb",
      "generators/asset_migration/asset_migration_generator.rb",
      "generators/asset_migration/templates/migration.rb",
      "has_assets.gemspec",
