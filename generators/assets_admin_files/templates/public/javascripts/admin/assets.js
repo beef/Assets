@@ -216,7 +216,7 @@ Object.extend(AssetBrowser, {
         div.insert(h4);
         div.insert(insert_image_large);
         div.insert(insert_image_medium);
-        div.insert(insert_image_small);  
+        div.insert(insert_image_small);
 
       } else {
         //setup for documents
@@ -287,8 +287,8 @@ Event.observe(window, 'load', function() {
       upload_progress_handler : UploadHandler.uploadProgress,
       upload_start_handler: UploadHandler.uploadStart,
       upload_error_handler : UploadHandler.uploadError,
-      upload_success_handler : UploadHandler.uploadSuccess,
-      upload_complete_handler : UploadHandler.uploadComplete,
+      upload_success_handler : AssetBrowser.uploadSuccess,
+      upload_complete_handler : AssetBrowser.uploadComplete,
       custom_settings : { 
         upload_form : 'asset-upload-form'
       },
