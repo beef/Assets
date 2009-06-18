@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "has_assets"
-    gem.summary = %Q{TODO}
+    gem.summary = %Q{Adds uploadable assets to a model and admin area for files}
     gem.email = "steve@wearebeef.co.uk"
     gem.homepage = "http://github.com/stengland/has_assets"
     gem.authors = ["Steve England"]
