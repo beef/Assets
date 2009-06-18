@@ -13,7 +13,7 @@ class AssetAdminFilesGenerator < Rails::Generator::Base
       "public/javascripts/upload_progress.js"].each do |file|
          m.file file, file
       end
-    end 
+    end
   end
   
 end

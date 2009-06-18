@@ -4,7 +4,6 @@
 <% if @asset.image? %> 
 <p>
   <%= image_tag @asset.public_filename(:medium), :title => 'Main Image' %>
-  <%= image_tag @asset.public_filename(:square), :title => 'Thumbnail' %>
 </p>
 <% end %>
 

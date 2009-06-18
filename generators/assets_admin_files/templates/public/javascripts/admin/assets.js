@@ -1,8 +1,8 @@
 var AssetBrowser = Class.create({
-  initialize: function(grouping, folder) {
+  initialize: function(grouping, folder, form) {
     AssetBrowser.current_grouping = grouping;
     AssetBrowser.dl = $('asset-browser');
-    AssetBrowser.setContentNodeForm('content-node-form');
+    AssetBrowser.setContentNodeForm(form);
     AssetBrowser.dts = AssetBrowser.dl.select('dt');
     AssetBrowser.open_folder = folder;
         
