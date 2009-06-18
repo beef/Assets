@@ -1,0 +1,26 @@
+<div>
+<% form_for(:asset, :url => admin_assets_path_with_session_information, :html => { :multipart => true, :id => 'asset-upload-form' } ) do |f| %>
+  <%= f.error_messages %>
+  <p>
+	  <%= f.label :category, 'Folder' %><br />
+    <%= f.text_field :category %>
+  </p>
+  <div class="auto_complete" id="asset_category_complete" style="display:none"></div>
+	
+  <p>
+    <%= f.label :decription %><br />
+    <%= f.text_field :description %>
+  </p>
+  
+  <div id="upload-elements">
+    <p>
+      <%= f.label :uploaded_data, "File" %><br />
+      <%= f.file_field :uploaded_data %>
+    </p>
+
+    <p>
+      <%= f.submit "Upload", :disable_with => 'Uploading...' %>
+    </p>
+  </div>
+<% end %>
+</div>

@@ -1,0 +1,52 @@
+<h3><%=h @asset.filename %></h3>
+
+<%= link_to_function 'close', 'AssetBrowser.closeInfo()' %>
+<% if @asset.image? %> 
+<p>
+  <%= image_tag @asset.public_filename(:medium), :title => 'Main Image' %>
+  <%= image_tag @asset.public_filename(:square), :title => 'Thumbnail' %>
+</p>
+<% end %>
+
+<% form_for([:admin, @asset]) do |f| %>
+  <%= f.error_messages %>
+  <p>
+	  <%= f.label :category, 'Folder' %><br />
+    <%= f.text_field :category %>
+  </p>
+  <div class="auto_complete" id="asset_category_complete" style="display:none"></div>
+	
+  <p>
+    <%= f.label :decription %><br />
+    <%= f.text_field :description %>
+  </p>
+  
+  <p>
+    <%= f.submit "Update", :disable_with => 'Updating...' %>
+  </p>
+<% end %>
+</div>
+
+<p>
+  <b>Size:</b>
+  <%= number_to_human_size(@asset.size) %>
+</p>
+
+<p>
+  <b>Content type:</b>
+  <%=h @asset.content_type %>
+</p>
+
+<% if @asset.image? %>
+
+<p>
+  <b>Height:</b>
+  <%=h @asset.height %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%=h @asset.width %>
+</p>
+
+<% end %>

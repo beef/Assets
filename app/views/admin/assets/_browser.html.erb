@@ -1,0 +1,23 @@
+<dl id="asset-browser">
+<% asset_types.each do |asset_type, assets| %>
+  <dt class="<%= asset_type.split('/').first.to_url %>" id="<%= asset_type.to_url %>-<%= assets.first.id %>"><%= asset_type %></dt>
+  <dd id="<%= asset_type.to_url %>-description">
+	<h3 class="type-heading"><%= asset_type %></h3>
+    <ul id="<%= asset_type.to_url %>-list" class="asset-list">
+    <% for asset in assets %>
+      <li class="<%= asset.content_type.gsub('/', ' ') %>" id="browser-asset-<%= asset.id %>">
+	  
+	  <% if asset.content_type =~ /image/ -%>
+		<%= render :partial => "admin/assets/image", :locals => { :asset => asset, :for_content => for_content } %>
+	  <% else %>
+	    <%= render :partial => "admin/assets/document", :locals => { :asset => asset, :for_content => for_content } %>
+	  <% end %>
+	  
+      </li>
+    <% end %>
+    </ul>
+  </dd>
+<% end %>
+</dl>
+<%= javascript_tag "new AssetBrowser('#{@grouping}', '#{params[:folder]}');" %>
+

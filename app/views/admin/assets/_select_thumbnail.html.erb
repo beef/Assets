@@ -1,0 +1,15 @@
+<h3>Replace Thumbnail for <%=h @asset.filename %></h3>
+<%= link_to_function 'close', 'AssetBrowser.closeThumbnail()' %>
+
+<% form_for(@asset, :url => replace_thumbnail_admin_asset_path_with_session_information(@asset), :html => { :multipart => true, :id => 'select-thumbnail-form' } ) do |f| %>
+
+
+  <%= image_tag @asset.public_filename(:square) %>
+  <p>
+    <%= f.label :uploaded_data, "Thumbnail file" %> Image should be 75x75. If not it will be resized and cropped to fit.<br/>
+    <%= f.file_field :uploaded_data, :class => "upload-elements" %>
+  </p>
+  <p class="upload-elements submit">
+    <%= f.submit "Upload", :disable_with => 'Uploading...' %>
+  </p>
+<% end -%>

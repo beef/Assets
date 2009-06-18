@@ -1,0 +1,20 @@
+<%= image_tag asset.public_filename(:square) %>
+<div>
+  <h4><%= truncate(asset.filename,{:length => 50}) %></h4>
+  <%= link_to_function "View Info", "AssetBrowser.openInfo(#{asset.id}, this)" %> | <%= link_to 'Replace Thumbnail', select_thumbnail_admin_asset_path(asset), :onclick => "AssetBrowser.selectThumbnail(#{asset.id}, this); return false;" %><br />
+  
+  
+  <% if for_content -%>
+  <%= link_to_function "Attach", "AssetBrowser.addAssetToContentNode(#{asset.to_json}.#{asset.class.name.demodulize.underscore})" %>
+  <h4>Insert Image</h4>
+  <%= link_to_function "Large", "addAsset(#{asset.id}, 'large' )" %> | <%= link_to_function "Medium ", "addAsset(#{asset.id}, 'medium' )" %> | <%= link_to_function "Small ", "addAsset(#{asset.id}, 'thumb' )" %>
+
+  <% elsif controller.controller_name != 'assets' %>
+
+  <%= link_to_function "Detach", "AssetBrowser.removeAssetFromContentNode(#{asset.id})" %>
+  <h4>Insert Image</h4>
+  <%= link_to_function "Large", "addAsset(#{asset.id}, 'large' )"  %> | <%= link_to_function "Medium ", "addAsset(#{asset.id}, 'medium' )" %> | <%= link_to_function "Small ", "addAsset(#{asset.id}, 'thumb' )" %>
+  <% else %>
+  <%= link_to_function "Delete", "AssetBrowser.assetAction(#{asset.to_json}.#{asset.class.name.demodulize.underscore})" %>
+  <% end -%>
+</div>

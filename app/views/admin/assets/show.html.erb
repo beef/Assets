@@ -1,0 +1,36 @@
+<h1>Showing assets <%=h @asset.filename %></h1>
+
+<% if @asset.image? %> 
+<p>
+  <%= image_tag @asset.public_filename(:medium) %>
+</p>
+<% end %>
+
+<p>
+  <b>Description:</b>
+  <%=h @asset.description %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%=h bytesToMeg(@resource.size) %>
+</p>
+
+<p>
+  <b>Content type:</b>
+  <%=h @asset.content_type %>
+</p>
+
+<% if @asset.image? %>
+
+<p>
+  <b>Height:</b>
+  <%=h @asset.height %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%=h @asset.width %>
+</p>
+
+<% end %>

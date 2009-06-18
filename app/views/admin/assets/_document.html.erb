@@ -1,0 +1,12 @@
+<%= link_to_function truncate(asset.filename,{:length => 50}), "AssetBrowser.openInfo(#{asset.id}, this)" %> - <%= asset.description %>
+<div>
+  <%= link_to_function "View Info<br/>", "AssetBrowser.openInfo(#{asset.id}, this)" %> 
+  <% if for_content -%>
+	<%= link_to_function "Insert<br/>", "addAsset(#{asset.id})" %>
+  	<%= link_to_function "Attach", "AssetBrowser.addAssetToContentNode(#{asset.to_json}.#{asset.class.name.demodulize.underscore})" %>  
+  <% elsif controller.controller_name != 'assets' %>
+  	<%= link_to_function "Detach", "AssetBrowser.removeAssetFromContentNode(#{asset.id})" %>
+  <% else %>
+	<%= link_to_function "Delete", "AssetBrowser.assetAction(#{asset.to_json}.#{asset.class.name.demodulize.underscore})" %>
+  <% end -%>
+</div>
