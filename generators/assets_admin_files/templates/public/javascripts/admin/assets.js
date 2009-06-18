@@ -1,8 +1,8 @@
 var AssetBrowser = Class.create({
-  initialize: function(grouping, folder, form) {
+  initialize: function(grouping, folder) {
     AssetBrowser.current_grouping = grouping;
     AssetBrowser.dl = $('asset-browser');
-    AssetBrowser.setContentNodeForm(form);
+    AssetBrowser.setContentNodeForm('has-assets-form');
     AssetBrowser.dts = AssetBrowser.dl.select('dt');
     AssetBrowser.open_folder = folder;
         
@@ -162,73 +162,69 @@ Object.extend(AssetBrowser, {
     this.assetList.show();
     if (!$('asset-' + asset.id)) {
       
-    if(/image/.test(asset.content_type)){
-      li = new Element('li', { 'class': asset.content_type.replace('/','-'), id: 'asset-' + asset.id }).update('<img alt=\"' + asset.filename + '\" src=\"' + asset.sizes.find(function(size){ return size[0] == 'square'; })[1] + '\" />');
-    } else {
-      li = new Element('li', { 'class': asset.content_type.replace('/','-'), id: 'asset-' + asset.id }).update(asset.filename + ' ' + asset.description);
-    }
-
-    filename = new Element('h4').update(asset.filename);
-    div = new Element('div');
-    h4 = new Element('h4').update("Insert Image");
-    view_info = new Element('a').update('View Info');
-    
-    view_info.onclick = function() {
-      AssetBrowser.openInfo(asset.id, this);
-      return false;
-    };
-
-    insert_image_large = new Element('a').update('Large | ');
-    insert_image_medium = new Element('a').update('Medium | ');
-    insert_image_small = new Element('a').update('Small');
-    
-    insert_image_large.onclick = function() {
-      addAsset(asset.id, 'large' );
-      return false;
-    };
-    insert_image_medium.onclick = function() {
-      addAsset(asset.id, 'medium' );
-      return false;
-    };
-    insert_image_small.onclick = function() {
-      addAsset(asset.id, 'thumb' );
-      return false;
-    };
-  
-    insert_document = new Element('a').update(' | Insert');
-    
-    var theForm = this.contentNodeForm;
-    
-    deleter = new Element('a').update('Detach');
-      deleter.onclick = function() {
-      AssetBrowser.removeAssetFromContentNode(asset.id);
-      return false;
-    };
-    
-    div.insert(filename);
-    div.insert(view_info);
-    div.insert(' | ');
-    div.insert(replace_thumbnail);
-    div.insert('<br/>');
-    div.insert(deleter);
-
-    li.insert(div);
-      
       if(/image/.test(asset.content_type)){
-      //setup for images
-        
+        li = new Element('li', { 'class': asset.content_type.replace('/','-'), id: 'asset-' + asset.id }).update('<img alt=\"' + asset.filename + '\" src=\"' + asset.sizes.find(function(size){ return size[0] == 'square'; })[1] + '\" />');
+      } else {
+        li = new Element('li', { 'class': asset.content_type.replace('/','-'), id: 'asset-' + asset.id }).update(asset.filename + ' ' + asset.description);
+      }
+
+      filename = new Element('h4').update(asset.filename);
+      div = new Element('div');
+      h4 = new Element('h4').update("Insert Image");
+      view_info = new Element('a').update('View Info');
+    
+      view_info.onclick = function() {
+        AssetBrowser.openInfo(asset.id, this);
+        return false;
+      };
+
+      insert_image_large = new Element('a').update('Large | ');
+      insert_image_medium = new Element('a').update('Medium | ');
+      insert_image_small = new Element('a').update('Small');
+    
+      insert_image_large.onclick = function() {
+        addAsset(asset.id, 'large' );
+        return false;
+      };
+      insert_image_medium.onclick = function() {
+        addAsset(asset.id, 'medium' );
+        return false;
+      };
+      insert_image_small.onclick = function() {
+        addAsset(asset.id, 'thumb' );
+        return false;
+      };
+      insert_document = new Element('a').update(' | Insert');
+    
+      var theForm = this.contentNodeForm;
+    
+      deleter = new Element('a').update('Detach');
+        deleter.onclick = function() {
+        AssetBrowser.removeAssetFromContentNode(asset.id);
+        return false;
+      };
+    
+      div.insert(filename);
+      div.insert(view_info);
+      div.insert('<br/>');
+      div.insert(deleter);
+
+      li.insert(div);
+      
+      if (/image/.test(asset.content_type)) {
+        //setup for images
         div.insert(h4);
         div.insert(insert_image_large);
-      div.insert(insert_image_medium);
-        div.insert(insert_image_small); 
+        div.insert(insert_image_medium);
+        div.insert(insert_image_small);  
 
-      }else{
-      //setup for documents
-         insert_document.onclick = function() {
-           addAsset(asset.id);
-           return false;
-         };
-         div.insert(insert_document);
+      } else {
+        //setup for documents
+        insert_document.onclick = function() {
+          addAsset(asset.id);
+          return false;
+        };
+        div.insert(insert_document);
       }
 
       this.assetList.insert(li);    
@@ -265,7 +261,7 @@ Object.extend(AssetBrowser, {
       UploadProgress.finish();
       AssetBrowser.reload();
     }
-  },
+  }
 
 });
 

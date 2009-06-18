@@ -1,13 +1,12 @@
 <h2><%= content_node.class.name.titleize %> Files</h2>
 <ul class="asset-list" id="asset-list">
-<% for asset in content_node.assets %>
-  <li id="asset-<%= asset.id %>" class="<%= first_or_last(asset, content_node.assets) %> <%= asset.content_type.gsub('/','-') %>">
-    
-	<% if asset.content_type =~ /image/ -%>
-		<%= render :partial => "admin/assets/image", :locals => { :asset => asset, :for_content => false } %>
-	<% else %>
-	    <%= render :partial => "admin/assets/document", :locals => { :asset => asset, :for_content => false } %>
-	<% end %>
-	
-<% end %> 
+<% for asset in content_node.assets -%>
+  <li id="asset-<%= asset.id %>" class="<%= asset.content_type.gsub('/','-') %>">
+<% if asset.content_type =~ /image/ -%>
+    <%= render :partial => "admin/assets/image", :locals => { :asset => asset, :for_content => false } %>
+<% else -%>
+    <%= render :partial => "admin/assets/document", :locals => { :asset => asset, :for_content => false } %>
+<% end -%>
+  </li>
+<% end -%> 
 </ul>

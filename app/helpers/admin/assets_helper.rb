@@ -5,11 +5,10 @@ module Admin::AssetsHelper
     render :partial => '/admin/assets/list', :locals => { :content_node => content_node }
   end
   
-  def asset_browser(for_content = false, set_lead = false)
+  def asset_browser(for_content = false)
     render :partial => '/admin/assets/browser', 
            :locals => { :asset_types => Asset.grouped_by_category,
-                        :for_content => for_content,
-                        :set_lead => set_lead }
+                        :for_content => for_content }
   end
   
   def asset_upload_form
