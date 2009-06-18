@@ -51,19 +51,6 @@ Object.extend(AssetBrowser, {
                                               evalScripts:true } );
   },
   
-  selectThumbnail: function(id, anchor) {
-    this.closeThumbnail();
-    list = $(anchor).up('ul');
-    list.hide();
-    list.insert({after: '<div id="asset-info"></div>'});
-    this.current_list = list;
-    this.current_info = list.next();
-
-    new Ajax.Request('/admin/assets/' + id + '/select_thumbnail', { method: 'get',
-                                              asynchronous:true, 
-                                              evalScripts:true } );
-  },
-  
   closeInfo: function() {
     if (this.current_list) {
       this.current_list.show();
@@ -185,15 +172,9 @@ Object.extend(AssetBrowser, {
     div = new Element('div');
     h4 = new Element('h4').update("Insert Image");
     view_info = new Element('a').update('View Info');
-    replace_thumbnail = new Element('a').update('Replace Thumbnail');
     
     view_info.onclick = function() {
       AssetBrowser.openInfo(asset.id, this);
-      return false;
-    };
-       
-    replace_thumbnail.onclick = function() {
-      AssetBrowser.selectThumbnail(asset.id, this);
       return false;
     };
 
@@ -202,26 +183,26 @@ Object.extend(AssetBrowser, {
     insert_image_small = new Element('a').update('Small');
     
     insert_image_large.onclick = function() {
-     addAsset(asset.id, 'large' );
-         return false;
-       };
-      insert_image_medium.onclick = function() {
-     addAsset(asset.id, 'medium' );
-         return false;
-       };
+      addAsset(asset.id, 'large' );
+      return false;
+    };
+    insert_image_medium.onclick = function() {
+      addAsset(asset.id, 'medium' );
+      return false;
+    };
     insert_image_small.onclick = function() {
-     addAsset(asset.id, 'thumb' );
-         return false;
-       };
+      addAsset(asset.id, 'thumb' );
+      return false;
+    };
   
-      insert_document = new Element('a').update(' | Insert');
+    insert_document = new Element('a').update(' | Insert');
     
     var theForm = this.contentNodeForm;
-  
-        deleter = new Element('a').update('Detach');
-        deleter.onclick = function() {
-          AssetBrowser.removeAssetFromContentNode(asset.id);
-          return false;
+    
+    deleter = new Element('a').update('Detach');
+      deleter.onclick = function() {
+      AssetBrowser.removeAssetFromContentNode(asset.id);
+      return false;
     };
     
     div.insert(filename);

@@ -1,8 +1,7 @@
 <%= image_tag asset.public_filename(:square) %>
 <div>
   <h4><%= truncate(asset.filename,{:length => 50}) %></h4>
-  <%= link_to_function "View Info", "AssetBrowser.openInfo(#{asset.id}, this)" %> | <%= link_to 'Replace Thumbnail', select_thumbnail_admin_asset_path(asset), :onclick => "AssetBrowser.selectThumbnail(#{asset.id}, this); return false;" %><br />
-  
+  <%= link_to_function "View Info", "AssetBrowser.openInfo(#{asset.id}, this)" %><br />
   
   <% if for_content -%>
   <%= link_to_function "Attach", "AssetBrowser.addAssetToContentNode(#{asset.to_json}.#{asset.class.name.demodulize.underscore})" %>

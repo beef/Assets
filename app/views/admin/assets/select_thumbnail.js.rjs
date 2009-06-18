@@ -1,2 +1,0 @@
-page.replace_html 'asset-info', :partial => 'admin/assets/select_thumbnail'
-page << 'init_thumbnail_swfu();'

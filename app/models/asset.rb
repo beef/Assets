@@ -16,7 +16,7 @@ class Asset < ActiveRecord::Base
   # validates_presence_of :description, :unless => :is_thumbnail?
   
   attr_accessor :position
-  attr_accessible :category, :description
+  attr_accessible :category, :description, :uploaded_data
   
   def description
     read_attribute('description').blank? ? 'No Description' : super

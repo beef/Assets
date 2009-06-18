@@ -48,7 +48,10 @@ Gem::Specification.new do |s|
      "generators/assets_admin_files/templates/public/javascripts/upload_progress.js",
      "has_assets.gemspec",
      "lib/flash_sesion_cookie_middleware.rb",
+     "lib/geometry_crop.rb",
      "lib/has_assets.rb",
+     "lib/imagescience_crop.rb",
+     "lib/swfupload.rb",
      "rails/init.rb",
      "test/has_assets_test.rb",
      "test/test_helper.rb"

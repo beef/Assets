@@ -1,9 +1,13 @@
+<% content_for :header do %>
+<%= javascript_include_tag 'admin/assets', 'swfupload', 'upload_progress' %>
+<% end -%>
+
 <dl id="asset-browser">
 <% asset_types.each do |asset_type, assets| %>
-  <dt class="<%= asset_type.split('/').first.to_url %>" id="<%= asset_type.to_url %>-<%= assets.first.id %>"><%= asset_type %></dt>
-  <dd id="<%= asset_type.to_url %>-description">
+  <dt class="<%= asset_type.split('/').first.parameterize %>" id="<%= asset_type.parameterize %>-<%= assets.first.id %>"><%= asset_type %></dt>
+  <dd id="<%= asset_type.parameterize %>-description">
 	<h3 class="type-heading"><%= asset_type %></h3>
-    <ul id="<%= asset_type.to_url %>-list" class="asset-list">
+    <ul id="<%= asset_type.parameterize %>-list" class="asset-list">
     <% for asset in assets %>
       <li class="<%= asset.content_type.gsub('/', ' ') %>" id="browser-asset-<%= asset.id %>">
 	  
