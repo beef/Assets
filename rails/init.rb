@@ -12,3 +12,8 @@ config.to_prepare do
   Admin::BaseController.helper(Admin::AssetsHelper)
 end
 ActiveRecord::Base.send :include, Beef::Has::Assets
+
+if defined?(Redcloth)
+  require 'custom_redcloth_tags'
+end
+

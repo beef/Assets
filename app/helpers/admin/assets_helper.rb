@@ -1,8 +1,10 @@
 module Admin::AssetsHelper
   
   def asset_list(content_node)
-    return if content_node.assets.empty?
-    render :partial => '/admin/assets/list', :locals => { :content_node => content_node }
+    unless content_node.assets.empty?
+      list = render( :partial => '/admin/assets/list', :locals => { :content_node => content_node } )
+    end
+    content_tag :div, list, :id => 'attach-asset-list'
   end
   
   def asset_browser(for_content = false)

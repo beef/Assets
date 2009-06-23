@@ -136,10 +136,15 @@ Object.extend(AssetBrowser, {
       this.contentNodeForm.model_name = this.contentNodeForm.className.split('_').slice(1,this.contentNodeForm.className.split('_').length).join('_');
       this.setUpAssetList();
       this.contentNodeForm.onsubmit = function() {
-        $$('#asset-list li').each(function(li) {
-          asset_id = li.id.split('-').last();
-          this.insert('<input type="hidden" name="' + this.model_name + '[asset_ids][]" id="asset_id-' + asset_id + '" value="' + asset_id + '" />');
-        }, this);
+        assets = $$('#asset-list li');
+        if (assets.size() == 0) {
+            $(this).insert('<input type="hidden" name="' + this.model_name + '[asset_ids]" value="" />');
+        } else {
+          assets.each(function(li) {
+            asset_id = li.id.split('-').last();
+            this.insert('<input type="hidden" name="' + this.model_name + '[asset_ids][]" id="asset_id-' + asset_id + '" value="' + asset_id + '" />');
+          }, this);          
+        }
         return true;
       };
     } 
