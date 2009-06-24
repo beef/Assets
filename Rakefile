@@ -5,9 +5,9 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "has_assets"
-    gem.summary = %Q{Adds uploadable assets to a model and admin area for files}
+    gem.summary = %Q{Rails Engine. Adds uploadable assets to a model and admin area for files}
     gem.email = "steve@wearebeef.co.uk"
-    gem.homepage = "http://github.com/stengland/has_assets"
+    gem.homepage = "http://github.com/beef/assets"
     gem.authors = ["Steve England"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
