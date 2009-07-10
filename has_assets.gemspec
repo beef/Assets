@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-06-24}
+  s.date = %q{2009-07-10}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "app/controllers/admin/assets_controller.rb",
      "app/helpers/admin/assets_helper.rb",
+     "app/helpers/assets_helper.rb",
      "app/models/asset.rb",
      "app/models/asseting.rb",
      "app/views/admin/assets/_browser.html.erb",
