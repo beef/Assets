@@ -14,7 +14,7 @@ config.to_prepare do
 end
 ActiveRecord::Base.send :include, Beef::Has::Assets
 
-if defined?(Redcloth)
+if defined?(RedCloth)
   require 'custom_redcloth_tags'
 end
 
