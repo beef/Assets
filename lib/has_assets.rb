@@ -8,7 +8,7 @@ module Beef
       module ClassMethods
         def has_assets
           has_many :assetings, :as => :assetable, :dependent => :delete_all
-          has_many :assets, :through => :assetings
+          has_many :assets, :through => :assetings, :order => 'assetings.id'
           
           # Override the default asset_ids method
           define_method("asset_ids=") do |new_value|
