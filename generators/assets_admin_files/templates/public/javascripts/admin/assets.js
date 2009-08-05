@@ -135,17 +135,26 @@ Object.extend(AssetBrowser, {
     if (this.contentNodeForm) {
       this.contentNodeForm.model_name = this.contentNodeForm.className.split('_').slice(1,this.contentNodeForm.className.split('_').length).join('_');
       this.setUpAssetList();
-      this.contentNodeForm.onsubmit = function() {
+      this.contentNodeForm.addAssetIDs = function() {
+        $$('input.asset_id').invoke('remove');
         assets = $$('#asset-list li');
         if (assets.size() == 0) {
             $(this).insert('<input type="hidden" name="' + this.model_name + '[asset_ids]" value="" />');
         } else {
           assets.each(function(li) {
             asset_id = li.id.split('-').last();
-            this.insert('<input type="hidden" name="' + this.model_name + '[asset_ids][]" id="asset_id-' + asset_id + '" value="' + asset_id + '" />');
+            this.insert('<input type="hidden" name="' + this.model_name + '[asset_ids][]" class="asset_id" value="' + asset_id + '" />');
           }, this);          
         }
+      };
+      
+      this.contentNodeForm.onsubmit = function() {
+        this.addAssetIDs();
         return true;
+      };
+      this.contentNodeForm.serialize = function() {
+        this.addAssetIDs();
+        return Form.serialize(this);
       };
     } 
   },
