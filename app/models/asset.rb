@@ -8,9 +8,9 @@ class Asset < ActiveRecord::Base
   has_many :assetings, :dependent => :delete_all
   belongs_to :assetable, :polymorphic => true
   
-  named_scope :not_thumbnails, :conditions => 'parent_id IS NULL', :order => 'filename'
-  named_scope :images, :conditions => "content_type LIKE 'image%'", :order => 'filename'
-  named_scope :documents, :conditions => "content_type NOT LIKE 'image%'", :order => 'filename'
+  named_scope :not_thumbnails, :conditions => 'parent_id IS NULL'
+  named_scope :images, :conditions => "content_type LIKE 'image%'"
+  named_scope :documents, :conditions => "content_type NOT LIKE 'image%'"
                  
   validates_as_attachment
   # validates_presence_of :description, :unless => :is_thumbnail?
