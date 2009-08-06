@@ -20,7 +20,7 @@ module AssetsHelper
     else
       return
     end
-    documents_items = documents.collect { |asset| content_tag( :li, link_to("Download #{asset.filename} (#{number_to_human_size(asset.size)})", asset.public_filename, :title => asset.description ) ) }
+    documents_items = documents.collect { |asset| content_tag( :li, link_to("<em>Download #{asset.filename}</em> (#{number_to_human_size(asset.size)})", asset.public_filename, :title => asset.description ) ) }
     content_tag :ul, documents_items.join, :class => 'documents' unless documents_items.empty?
   end
 end
