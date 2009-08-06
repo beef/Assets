@@ -383,7 +383,7 @@ var Renameable = Class.create(Holdable, {
       this.replace(this.value);
     });
     this.text_input.observe('change', function() {
-      asset_id = elem.id.split(':').last();
+      asset_id = elem.id.split('-').last();
       new Ajax.Request('/admin/assets/' + asset_id + '/rename_category' , {
         parameters: { name: this.value  }
       });
