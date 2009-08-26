@@ -1,5 +1,6 @@
 require 'flash_sesion_cookie_middleware'
 require 'admin_area'
+require 'has_assets'
 require 'swfupload'
 require 'geometry_crop'
 require 'imagescience_crop'

@@ -1,4 +1,5 @@
 class Admin::AssetsController < Admin::BaseController
+  unloadable
   
   protect_from_forgery :except => [:destroy, :rename_category]
 
