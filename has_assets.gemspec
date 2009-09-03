@@ -49,7 +49,6 @@ Gem::Specification.new do |s|
      "lib/has_assets/custom_redcloth_tags.rb",
      "lib/has_assets/flash_sesion_cookie_middleware.rb",
      "lib/has_assets/geometry_crop.rb",
-     "lib/has_assets/has_assets.rb",
      "lib/has_assets/imagescience_crop.rb",
      "lib/has_assets/swfupload.rb",
      "rails/init.rb",
