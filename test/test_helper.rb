@@ -1,9 +1,8 @@
 require 'rubygems'
 require 'test/unit'
 require 'shoulda'
+require 'redcloth'
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'has_assets'
 
 class Test::Unit::TestCase

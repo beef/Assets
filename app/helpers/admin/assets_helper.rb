@@ -23,7 +23,8 @@ module Admin::AssetsHelper
   
   def admin_assets_path_with_session_information
     session_key = ActionController::Base.session_options[:key]
-    admin_assets_path(session_key => cookies[session_key], request_forgery_protection_token => form_authenticity_token)
+    params = {request_forgery_protection_token => form_authenticity_token, :cookies => cookies}
+    admin_assets_path(params)
   end
   
   def replace_thumbnail_admin_asset_path_with_session_information(asset)
