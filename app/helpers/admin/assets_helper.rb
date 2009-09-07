@@ -33,7 +33,7 @@ module Admin::AssetsHelper
   end
   
   def flickr_select
-    return unless File.exists?("#{RAILS_ROOT}/config/flickr.yml")
+    return unless defined?(Flickr) and File.exists?("#{RAILS_ROOT}/config/flickr.yml")
     flickr = Flickr.new("#{RAILS_ROOT}/config/flickr.yml")
     flickr_params = { :per_page => '12', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
     flickr_params[:tags] = params[:tags] unless params[:tags].blank?

@@ -10,7 +10,6 @@ begin
     gem.homepage = "http://github.com/beef/assets"
     gem.authors = ["Steve England"]
     gem.add_dependency( "flickr-fu")
-    gem.add_dependency( "mime-types")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 
