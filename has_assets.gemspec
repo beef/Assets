@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-09-03}
+  s.date = %q{2009-09-07}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "app/controllers/admin/assets_controller.rb",
+     "app/controllers/admin/flickrs_controller.rb",
      "app/helpers/admin/assets_helper.rb",
      "app/helpers/assets_helper.rb",
      "app/models/asset.rb",
@@ -36,6 +37,9 @@ Gem::Specification.new do |s|
      "app/views/admin/assets/rename_category.js.rjs",
      "app/views/admin/assets/show.html.erb",
      "app/views/admin/assets/show.js.rjs",
+     "app/views/admin/flickrs/_selector.html.erb",
+     "app/views/admin/flickrs/show.html.erb",
+     "app/views/admin/flickrs/show.js.rjs",
      "config/routes.rb",
      "generators/asset_migration/asset_migration_generator.rb",
      "generators/asset_migration/templates/migration.rb",
