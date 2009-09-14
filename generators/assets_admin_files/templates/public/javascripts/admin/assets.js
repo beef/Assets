@@ -390,3 +390,11 @@ var Renameable = Class.create(Holdable, {
     });
   } 
 });
+
+var load_flickr_select = function(){
+  $$('#flickr-select img').each(function(el){
+    
+    el.writeAttribute('src', el.readAttribute('flickr_src'));
+  });
+}
+document.observe('dom:loaded', load_flickr_select);
