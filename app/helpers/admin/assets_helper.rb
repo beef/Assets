@@ -42,22 +42,22 @@ module Admin::AssetsHelper
   end
 
 
-  def lastest_flickr
-    return if Settings.flickr_api_key.blank? or Settings.flickr_user_id.blank?
-    Flickr::API.connect Settings.flickr_api_key, Settings.flickr_api_secret, Settings.flickr_auth_token
-    flickr_params = { :per_page => '5', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
-    flickr_params[:tags] = params[:tags] unless params[:tags].blank?
-    flickr_result = Flickr::Photo.find(:all, flickr_params)
-    render :partial => 'admin/shared/flickr_latest.html.erb', :locals => { :flickr_images => flickr_result }
-  end
+  # def lastest_flickr
+  #   return if Settings.flickr_api_key.blank? or Settings.flickr_user_id.blank?
+  #   Flickr::API.connect Settings.flickr_api_key, Settings.flickr_api_secret, Settings.flickr_auth_token
+  #   flickr_params = { :per_page => '5', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
+  #   flickr_params[:tags] = params[:tags] unless params[:tags].blank?
+  #   flickr_result = Flickr::Photo.find(:all, flickr_params)
+  #   render :partial => 'admin/shared/flickr_latest.html.erb', :locals => { :flickr_images => flickr_result }
+  # end
   
-  
-  def flickr_select
-    return if Settings.flickr_api_key.blank? or Settings.flickr_user_id.blank?
-    Flickr::API.connect Settings.flickr_api_key, Settings.flickr_api_secret, Settings.flickr_auth_token
-    flickr_params = { :per_page => '12', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
-    flickr_params[:tags] = params[:tags] unless params[:tags].blank?
-    flickr_result = Flickr::Photo.find(:all, flickr_params)
-    render :partial => 'admin/shared/flickr.html.erb', :locals => { :flickr_images => flickr_result }
-  end
+  # 
+  # def flickr_select
+  #   return if Settings.flickr_api_key.blank? or Settings.flickr_user_id.blank?
+  #   Flickr::API.connect Settings.flickr_api_key, Settings.flickr_api_secret, Settings.flickr_auth_token
+  #   flickr_params = { :per_page => '12', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
+  #   flickr_params[:tags] = params[:tags] unless params[:tags].blank?
+  #   flickr_result = Flickr::Photo.find(:all, flickr_params)
+  #   render :partial => 'admin/shared/flickr.html.erb', :locals => { :flickr_images => flickr_result }
+  # end
 end
