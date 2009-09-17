@@ -169,7 +169,7 @@ Object.extend(AssetBrowser, {
 
   addAssetToContentNode: function(asset) {
     if (!this.assetList) {
-    $('attach-asset-list').insert({top:'<h2 class="drop-down open">' + this.contentNodeForm.model_name + ' Files</h2><ul class="asset-list" id="asset-list"></ul>'});
+    $('attach-asset-list').insert({top:'<h2 class="drop-down open">' + this.contentNodeForm.model_name.charAt(0).toUpperCase() + this.contentNodeForm.model_name.slice(1).toLowerCase() + ' Files</h2><ul class="asset-list" id="asset-list"></ul>'});
       this.setUpAssetList();
     }
 
