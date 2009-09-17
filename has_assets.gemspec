@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{has_assets}
-  s.version = "0.3.8"
+  s.version = "0.3.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-09-15}
+  s.date = %q{2009-09-17}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -73,8 +73,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Rails Engine. Adds uploadable assets to a model and admin area for files}
   s.test_files = [
-    "test/has_assets_test.rb",
-     "test/test_helper.rb"
+    "test/test_helper.rb",
+     "test/has_assets_test.rb"
   ]
 
   if s.respond_to? :specification_version then
