@@ -392,9 +392,15 @@ var Renameable = Class.create(Holdable, {
 });
 
 var load_flickr_select = function(){
-  $$('#flickr-select img').each(function(el){
-    
-    el.writeAttribute('src', el.readAttribute('flickr_src'));
-  });
+  new Ajax.Updater('flickr-image-container', '/flickrs/', {
+    parameters: { format: 'html', authenticity_token: AJ.authenticity_token() },
+    onSuccess: swap_flickr_image_src
+});
+}
+var load_flickr_select = function(){
+  new Ajax.Updater('flickr-image-container', '/admin/flickrs', {
+    method: 'get',
+    parameters: { format: 'html', authenticity_token: AJ.authenticity_token() }
+});
 }
 document.observe('dom:loaded', load_flickr_select);

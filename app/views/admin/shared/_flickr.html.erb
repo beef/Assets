@@ -1,11 +1,14 @@
 
 <div id="flickr-select">
-  <% form_remote_tag( :url => admin_flickr_path ) do -%>
+  <% form_remote_tag( :url => admin_flickrs_path ) do -%>
   <p><label for="tags">Search by tag:</label>
   <%= text_field_tag :tags, params[:tags] %> &nbsp; <%= submit_tag "go" %></p>
   
   <% end -%>
-
-  <%= render :partial => 'admin/shared/flickr_image.html.erb', :collection => flickr_images -%>
+  
+  <div id="flickr-image-container">
+    <p>Loading Flickr images</p>
+    <% #= render :partial => 'admin/shared/flickr_image.html.erb', :collection => flickr_images -%>
+  </div>
 
 </div>
