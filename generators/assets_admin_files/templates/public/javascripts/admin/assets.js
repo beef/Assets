@@ -391,16 +391,22 @@ var Renameable = Class.create(Holdable, {
   } 
 });
 
-var load_flickr_select = function(){
-  new Ajax.Updater('flickr-image-container', '/flickrs/', {
-    parameters: { format: 'html', authenticity_token: AJ.authenticity_token() },
-    onSuccess: swap_flickr_image_src
-});
+var flickr_comms_ref = false;
+var flickr_before_handler = function(){
+  if(false != flickr_comms_ref)
+    flickr_comms_ref;
+  $('flickr_loading').show();
+}; 
+var flickr_display_images = function(response){
+  $('flickr_loading').hide();
+  $('flickr-image-container').update(response.responseText)
 }
-var load_flickr_select = function(){
-  new Ajax.Updater('flickr-image-container', '/admin/flickrs', {
+var flickr_load_select = function(){
+  flickr_before_handler();
+  flickr_comms_ref = new Ajax.Request('/admin/flickrs', {
     method: 'get',
-    parameters: { format: 'html', authenticity_token: AJ.authenticity_token() }
+    parameters: { format: 'html', authenticity_token: AJ.authenticity_token() },
+    onSuccess: flickr_display_images
 });
 }
-document.observe('dom:loaded', load_flickr_select);
+document.observe('dom:loaded', flickr_load_select);
