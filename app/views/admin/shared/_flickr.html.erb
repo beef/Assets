@@ -10,4 +10,8 @@
     <% #= render :partial => 'admin/shared/flickr_image.html.erb', :collection => flickr_images -%>
   </div>
 
+  <ul id="flickr_nav">
+    <li class="first"><a href="#" onclick="flickr_get_prev_page();return false;">previous</a></li>&nbsp;|&nbsp;
+    <li class="last"><a href="#" onclick="flickr_get_next_page();return false;">next</a></li>
+  </ul>
 </div>
