@@ -1,1 +1,1 @@
-<img src="<%= flickr_image.url(:square) %>" alt="<%= flickr_image.description || flickr_image.title %>" title="<%= flickr_image.title %>" onclick="addLinkedImage('<%= flickr_image.url('small') %>',this.alt)"/>
+<img src="<%= flickr_image.url(:square) %>" alt="<%= flickr_image.description.blank? ? flickr_image.title : flickr_image.description %>" title="<%= flickr_image.title %>" onclick="addLinkedImage('<%= flickr_image.url() %>',this.alt, '<%= flickr_image.url('small') %>')"/>
