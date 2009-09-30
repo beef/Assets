@@ -1,0 +1,9 @@
+<% for asset in assets -%>
+      <li class="<%= asset.content_type.gsub('/', ' ') %>" id="browser-asset-<%= asset.id %>">
+<% if asset.content_type =~ /image/ -%>
+        <%= render :partial => "admin/assets/image", :locals => { :asset => asset, :for_content => for_content } %>
+<% else -%>
+        <%= render :partial => "admin/assets/document", :locals => { :asset => asset, :for_content => for_content } %>
+<% end -%>
+      </li>
+<% end unless ajaxify -%>
