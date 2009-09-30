@@ -12,6 +12,10 @@ var AssetBrowser = Class.create({
         dt.dd.hide();
         dt.onclick = function() {
           AssetBrowser.closeInfo();
+
+          if(AssetBrowser.ajax && !this.dd.visible() && !dt.dd.down('ul li'))
+            AssetBrowser.loadFilesByFolder(dt.innerHTML, dt.dd.down('ul').id);
+
           this.dd.toggle();         
           if (AssetBrowser.current_content != this.dd) {
             if (AssetBrowser.current_content != null && AssetBrowser.current_content.visible()) {
@@ -74,7 +78,15 @@ Object.extend(AssetBrowser, {
       this.destroyAsset(asset);
     }
   },
-  
+
+  loadFilesByFolder: function(folder_name, folder_id){
+      new Ajax.Request('/admin/assets/category', { method: 'get',
+                                                     asynchronous:true, 
+                                                     parameters: { for_content: AssetBrowser.for_content, format: 'html', category: folder_name, authenticity_token: AJ.authenticity_token() },
+                                                     onSuccess: function(response){ $(folder_id).update(response.responseText); } } );
+    
+  },
+
   destroyAsset: function(asset) {
     if (confirm('Are you sure you wish to delete the asset \'' + asset.filename + ' \'?')) {
       new Ajax.Request('/admin/assets/'+ asset.id, { method: 'delete',

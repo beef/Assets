@@ -1,1 +1,1 @@
-<%= render :partial => "admin/assets/category_contents", :locals => { :assets => @assets, :for_content => (params[:for_content] || false) } %>
+<%= render :partial => "admin/assets/category_contents", :locals => { :ajaxify => true, :assets => @assets, :for_content => (params[:for_content] || false) } %>

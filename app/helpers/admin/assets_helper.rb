@@ -10,7 +10,8 @@ module Admin::AssetsHelper
   def asset_browser(for_content = false)
     render :partial => '/admin/assets/browser', 
            :locals => { :asset_types => Asset.grouped_by_category,
-                        :for_content => for_content }
+                        :for_content => for_content,
+                        :ajaxify        => true }
   end
   
   def asset_upload_form

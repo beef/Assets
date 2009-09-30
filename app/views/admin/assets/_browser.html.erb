@@ -8,7 +8,7 @@
   <dd id="<%= asset_type.parameterize %>-description">
     <h3 class="type-heading"><%= asset_type %></h3>
     <ul id="<%= asset_type.parameterize %>-list" class="asset-list">
-<%= render :partial => "admin/assets/category_contents", :locals => { :assets => assets, :for_content => for_content } %>
+<%= render :partial => "admin/assets/category_contents", :locals => { :assets => assets, :for_content => for_content } unless ajaxify %>
     </ul>
   </dd>
 <% end -%>
