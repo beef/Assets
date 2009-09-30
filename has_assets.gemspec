@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{has_assets}
-  s.version = "0.5.2"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-09-29}
+  s.date = %q{2009-09-30}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -29,12 +29,14 @@ Gem::Specification.new do |s|
      "app/models/asset.rb",
      "app/models/asseting.rb",
      "app/views/admin/assets/_browser.html.erb",
+     "app/views/admin/assets/_category_contents.html.erb",
      "app/views/admin/assets/_document.html.erb",
      "app/views/admin/assets/_file_info.html.erb",
      "app/views/admin/assets/_form.html.erb",
      "app/views/admin/assets/_image.html.erb",
      "app/views/admin/assets/_list.html.erb",
      "app/views/admin/assets/_toggle.html.erb",
+     "app/views/admin/assets/category.html.erb",
      "app/views/admin/assets/index.html.erb",
      "app/views/admin/assets/index.js.rjs",
      "app/views/admin/assets/rename_category.js.rjs",
