@@ -35,25 +35,20 @@ module Admin::AssetsHelper
 
 
   def lastest_flickr
-    return unless defined?(Flickr) and File.exists?("#{RAILS_ROOT}/config/flickr.yml")
+    return unless defined?(Flickr) and File.exists?("#{RAILS_ROOT}/config/flickr.yml") and !Settings.flickr_user_id.blank?
     flickr = Flickr.new("#{RAILS_ROOT}/config/flickr.yml")
     flickr_params = { :per_page => '5', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
     flickr_params[:tags] = params[:tags] unless params[:tags].blank?
     flickr_result = flickr.photos.search(flickr_params)
     render :partial => 'admin/shared/flickr_latest.html.erb', :locals => { :flickr_images => flickr_result }
+  rescue RuntimeError => e
+    logger.warn "Flickr error: #{e}"
+    return
   end
   
   
   def flickr_select
-    return unless defined?(Flickr) and File.exists?("#{RAILS_ROOT}/config/flickr.yml")
-    flickr = Flickr.new("#{RAILS_ROOT}/config/flickr.yml")
-    flickr_params = { :per_page => '12', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
-    unless params[:tags].blank?
-      flickr_params[:tags] = params[:tags]
-      flickr_result = flickr.photos.search(flickr_params)
-    else
-      flickr_result = flickr.photos.recent(flickr_params)
-    end
-    render :partial => 'admin/shared/flickr.html.erb', :locals => { :flickr_images => (flickr_result || []) }
+    return unless defined?(Flickr) and File.exists?("#{RAILS_ROOT}/config/flickr.yml") and !Settings.flickr_user_id.blank?
+    render :partial => 'admin/flickrs/selector'
   end
 end

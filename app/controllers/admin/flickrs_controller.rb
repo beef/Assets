@@ -14,17 +14,15 @@ class Admin::FlickrsController < Admin::BaseController
   end
 
   def index
-    @flickr_result = {}
-    if defined?(Flickr) and File.exists?("#{RAILS_ROOT}/config/flickr.yml")
-      flickr = Flickr.new("#{RAILS_ROOT}/config/flickr.yml")
-      flickr_params = { :per_page => '12', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
-      unless params[:tags].blank?
-        flickr_params[:tags] = params[:tags]
-        @flickr_result = flickr.photos.search(flickr_params)
-      else
-        @flickr_result = flickr.photos.get_recent(flickr_params)
+    respond_to do |format|
+      format.js do
+        if defined?(Flickr) and File.exists?("#{RAILS_ROOT}/config/flickr.yml")
+          flickr = Flickr.new("#{RAILS_ROOT}/config/flickr.yml")
+          flickr_params = { :per_page => '12', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
+          flickr_params[:tags] = params[:tags] unless params[:tags].blank?
+          @flickr_result = flickr.photos.search(flickr_params)
+        end
       end
     end
-    render :layout => false
   end
 end

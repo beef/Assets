@@ -450,7 +450,7 @@ var flickr_get_page = function(num){
   else{
     flickr_comms_ref = new Ajax.Request('/admin/flickrs', {
       method: 'get',
-      parameters: { page: num, format: 'html', authenticity_token: AJ.authenticity_token() },
+      parameters: { page: num, format: 'html' },
       onSuccess: function(response){ $$('.flickr-page').invoke('hide');flickr_display_images(response, num); }
     });
   }
@@ -461,11 +461,8 @@ var flickr_display_images = function(response, page){
   $('flickr-image-container').insert('<div class="flickr-page" id="flickr-page-' + page + '">' +response.responseText+ '</div>')
 };
 var flickr_load_select = function(){
-  flickr_before_handler();
-  flickr_comms_ref = new Ajax.Request('/admin/flickrs', {
-    method: 'get',
-    parameters: { page: current_page, format: 'html', authenticity_token: AJ.authenticity_token() },
-    onSuccess: function(response){ flickr_display_images(response, current_page); }
-  });
+  if($('flickr-image-container')) {
+    new Ajax.Request('/admin/flickrs', {method: 'get'});
+  }
 };
 document.observe('dom:loaded', flickr_load_select);

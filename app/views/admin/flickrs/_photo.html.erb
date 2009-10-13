@@ -1,0 +1,1 @@
+<%= link_to "#{image_tag photo.url(:square), :alt => photo.description}", "#{photo.url(:large)}", :title => "#{photo.title}", :onclick => "addLinkedImage('#{photo.url(:medium)}',this.title); return false;" %>

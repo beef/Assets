@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-09-30}
+  s.date = %q{2009-10-13}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -42,13 +42,12 @@ Gem::Specification.new do |s|
      "app/views/admin/assets/rename_category.js.rjs",
      "app/views/admin/assets/show.html.erb",
      "app/views/admin/assets/show.js.rjs",
+     "app/views/admin/flickrs/_flickr_latest.html.erb",
+     "app/views/admin/flickrs/_photo.html.erb",
      "app/views/admin/flickrs/_selector.html.erb",
-     "app/views/admin/flickrs/index.html.erb",
+     "app/views/admin/flickrs/index.js.rjs",
      "app/views/admin/flickrs/show.html.erb",
      "app/views/admin/flickrs/show.js.rjs",
-     "app/views/admin/shared/_flickr.html.erb",
-     "app/views/admin/shared/_flickr_image.html.erb",
-     "app/views/admin/shared/_flickr_latest.html.erb",
      "config/routes.rb",
      "generators/asset_migration/asset_migration_generator.rb",
      "generators/asset_migration/templates/migration.rb",
@@ -59,7 +58,6 @@ Gem::Specification.new do |s|
      "generators/assets_admin_files/templates/public/javascripts/swfupload.js",
      "generators/assets_admin_files/templates/public/javascripts/upload_progress.js",
      "has_assets.gemspec",
-     "lib/flickr.rb",
      "lib/has_assets.rb",
      "lib/has_assets/custom_redcloth_tags.rb",
      "lib/has_assets/flash_sesion_cookie_middleware.rb",
@@ -76,8 +74,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Rails Engine. Adds uploadable assets to a model and admin area for files}
   s.test_files = [
-    "test/test_helper.rb",
-     "test/has_assets_test.rb"
+    "test/has_assets_test.rb",
+     "test/test_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
