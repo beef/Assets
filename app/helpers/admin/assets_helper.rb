@@ -48,8 +48,12 @@ module Admin::AssetsHelper
     return unless defined?(Flickr) and File.exists?("#{RAILS_ROOT}/config/flickr.yml")
     flickr = Flickr.new("#{RAILS_ROOT}/config/flickr.yml")
     flickr_params = { :per_page => '12', :page => params[:page], :user_id => Settings.flickr_user_id, :sort => 'date-taken-desc', :tag_mode => 'all' }
-    flickr_params[:tags] = params[:tags] unless params[:tags].blank?
-    flickr_result = flickr.photos.search(flickr_params)
-    render :partial => 'admin/shared/flickr.html.erb', :locals => { :flickr_images => flickr_result }
+    unless params[:tags].blank?
+      flickr_params[:tags] = params[:tags]
+      flickr_result = flickr.photos.search(flickr_params)
+    else
+      flickr_result = flickr.photos.recent(flickr_params)
+    end
+    render :partial => 'admin/shared/flickr.html.erb', :locals => { :flickr_images => (flickr_result || []) }
   end
 end
