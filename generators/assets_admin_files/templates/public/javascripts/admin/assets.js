@@ -146,6 +146,8 @@ Object.extend(AssetBrowser, {
     this.contentNodeForm = $(id);
     if (this.contentNodeForm) {
       this.contentNodeForm.model_name = this.contentNodeForm.className.split('_').slice(1,this.contentNodeForm.className.split('_').length).join('_');
+      this.contentNodeForm.model_title = '';
+      this.contentNodeForm.className.split('_').slice(1,this.contentNodeForm.className.split('_').length).each(function(e){ this.contentNodeForm.model_title = this.contentNodeForm.model_title + e.charAt(0).toUpperCase() + e.slice(1).toLowerCase(); });
       this.setUpAssetList();
       this.contentNodeForm.addAssetIDs = function() {
         $$('input.asset_id').invoke('remove');
