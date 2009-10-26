@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "has_assets"
+    gem.name = "beef-has_assets"
     gem.summary = %Q{Rails Engine. Adds uploadable assets to a model and admin area for files}
     gem.email = "steve@wearebeef.co.uk"
     gem.homepage = "http://github.com/beef/assets"
