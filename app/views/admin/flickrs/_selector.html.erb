@@ -1,6 +1,6 @@
 <div id="flickr-select">
   <h2>Flickr Images</h2>
-  <% form_remote_tag( :url => admin_flickr_path, :method => :get ) do -%>
+  <% form_remote_tag( :url => admin_flickrs_path, :method => :get ) do -%>
   <p><label for="tags">Search by tag:</label>
   <%= text_field_tag :tags, params[:tags] %> &nbsp; <%= submit_tag "go" %></p>
   
