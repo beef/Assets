@@ -1,10 +1,12 @@
 var AssetBrowser = Class.create({
-  initialize: function(grouping, folder) {
+  initialize: function(grouping, folder, for_content, ajax) {
     AssetBrowser.current_grouping = grouping;
     AssetBrowser.dl = $('asset-browser');
     AssetBrowser.setContentNodeForm('has-assets-form');
     AssetBrowser.dts = AssetBrowser.dl.select('dt');
     AssetBrowser.open_folder = folder;
+    AssetBrowser.ajax = (ajax || false);
+    AssetBrowser.for_content = (for_content || false);
         
     AssetBrowser.dts.each(function(dt) {
       dt.dd = dt.next('dd');
@@ -16,7 +18,9 @@ var AssetBrowser = Class.create({
           if(AssetBrowser.ajax && !this.dd.visible() && !dt.dd.down('ul li'))
             AssetBrowser.loadFilesByFolder(dt.innerHTML, dt.dd.down('ul').id);
 
-          this.dd.toggle();         
+
+
+          this.dd.toggle();
           if (AssetBrowser.current_content != this.dd) {
             if (AssetBrowser.current_content != null && AssetBrowser.current_content.visible()) {
               AssetBrowser.current_content.toggle();
@@ -78,15 +82,7 @@ Object.extend(AssetBrowser, {
       this.destroyAsset(asset);
     }
   },
-
-  loadFilesByFolder: function(folder_name, folder_id){
-      new Ajax.Request('/admin/assets/category', { method: 'get',
-                                                     asynchronous:true, 
-                                                     parameters: { for_content: AssetBrowser.for_content, format: 'html', category: folder_name, authenticity_token: AJ.authenticity_token() },
-                                                     onSuccess: function(response){ $(folder_id).update(response.responseText); } } );
-    
-  },
-
+  
   destroyAsset: function(asset) {
     if (confirm('Are you sure you wish to delete the asset \'' + asset.filename + ' \'?')) {
       new Ajax.Request('/admin/assets/'+ asset.id, { method: 'delete',
@@ -108,7 +104,13 @@ Object.extend(AssetBrowser, {
     }
   },
   
-
+  loadFilesByFolder: function(folder_name, folder_id){
+      new Ajax.Request('/admin/assets/category', { method: 'get',
+                                                     asynchronous:true, 
+                                                     parameters: { for_content: AssetBrowser.for_content, format: 'html', category: folder_name, authenticity_token: AJ.authenticity_token() },
+                                                     onSuccess: function(response){ $(folder_id).update(response.responseText); } } );
+    
+  },
   
   // Fire once a asset has been uploaded
   uploadedAsset: function(asset) {
@@ -146,8 +148,6 @@ Object.extend(AssetBrowser, {
     this.contentNodeForm = $(id);
     if (this.contentNodeForm) {
       this.contentNodeForm.model_name = this.contentNodeForm.className.split('_').slice(1,this.contentNodeForm.className.split('_').length).join('_');
-      this.contentNodeForm.model_title = '';
-      this.contentNodeForm.className.split('_').slice(1,this.contentNodeForm.className.split('_').length).each(function(e){ this.contentNodeForm.model_title = this.contentNodeForm.model_title + e.charAt(0).toUpperCase() + e.slice(1).toLowerCase(); });
       this.setUpAssetList();
       this.contentNodeForm.addAssetIDs = function() {
         $$('input.asset_id').invoke('remove');
@@ -404,62 +404,6 @@ var Renameable = Class.create(Holdable, {
     });
   } 
 });
-
-/**
- * Ajax.Request.abort
- * extend the prototype.js Ajax.Request object so that it supports an abort method
- */
-Ajax.Request.prototype.abort = function() {
-    // prevent and state change callbacks from being issued
-    this.transport.onreadystatechange = Prototype.emptyFunction;
-    // abort the XHR
-    this.transport.abort();
-    // update the request counter
-    Ajax.activeRequestCount--;
-};
-
-
-
-
-var flickr_comms_ref = false;
-var flickr_before_handler = function(){
-  if(false != flickr_comms_ref)
-    flickr_comms_ref.abort();
-  $('flickr_loading').show();
-};
-
-var current_page = 1;
-var flickr_get_next_page = function(button){
-  flickr_get_page(current_page+=1);
-}
-var flickr_get_prev_page = function(button){
-  current_page = Math.max(1,current_page-1)
-  flickr_get_page(current_page);
-}
-
-var flickr_get_page = function(num){
-  flickr_before_handler();
-
-  //if we have this page already
-  if(page_div = $('flickr-page-' + num)){
-    $$('.flickr-page').invoke('hide');
-    page_div.show();
-    $('flickr_loading').hide();
-  }
-  //get it
-  else{
-    flickr_comms_ref = new Ajax.Request('/admin/flickrs', {
-      method: 'get',
-      parameters: { page: num, format: 'html' },
-      onSuccess: function(response){ $$('.flickr-page').invoke('hide');flickr_display_images(response, num); }
-    });
-  }
-    
-}; 
-var flickr_display_images = function(response, page){
-  $('flickr_loading').hide();
-  $('flickr-image-container').insert('<div class="flickr-page" id="flickr-page-' + page + '">' +response.responseText+ '</div>')
-};
 var flickr_load_select = function(){
   if($('flickr-image-container')) {
     new Ajax.Request('/admin/flickrs', {method: 'get'});
