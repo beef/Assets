@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{beef-has_assets}
-  s.version = "0.6.0"
+  s.version = "0.6.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-10-26}
+  s.date = %q{2009-10-27}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -48,6 +48,7 @@ Gem::Specification.new do |s|
      "app/views/admin/flickrs/index.js.rjs",
      "app/views/admin/flickrs/show.html.erb",
      "app/views/admin/flickrs/show.js.rjs",
+     "beef-has_assets.gemspec",
      "config/routes.rb",
      "generators/asset_migration/asset_migration_generator.rb",
      "generators/asset_migration/templates/migration.rb",
