@@ -8,10 +8,9 @@
   <dd id="<%= asset_type.parameterize %>-description">
     <h3 class="type-heading"><%= asset_type %></h3>
     <ul id="<%= asset_type.parameterize %>-list" class="asset-list">
-<%= render :partial => "admin/assets/category_contents", :locals => { :assets => assets, :for_content => for_content } unless ajaxify %>
     </ul>
   </dd>
 <% end -%>
 </dl>
-<%= javascript_tag "new AssetBrowser('#{@grouping}', '#{params[:folder]}', #{for_content.to_s}, #{ajaxify.to_s});" %>
+<%= javascript_tag "new AssetBrowser('#{(@grouping || 'by_category')}', '#{params[:folder]}', #{for_content.to_s});" %>
 

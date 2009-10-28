@@ -49,6 +49,16 @@ class Admin::AssetsController < Admin::BaseController
       format.js { render :layout => false}
     end
   end
+
+  def content_type
+    @assets = Asset.not_thumbnails.all(:conditions => ["content_type = ?",params[:category]])
+
+    respond_to do |format|
+      format.html { render :layout => false, :action => 'category'}
+      format.xml  { @assets.to_xml }
+      format.js { render :layout => false, :action => 'category'}
+    end
+  end
   
   def descriptions
     @descriptions = Asset.not_thumbnails.find(:all, :select => 'description', :group => 'description', :order => 'description', :conditions => 'description IS NOT NULL')

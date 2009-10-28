@@ -1,7 +1,7 @@
 <h1>Browse for Files</h1>
 <%= toggle_grouping_links %>
 <div id="main-browser">
-<%= render :partial => 'browser', :locals => { :ajaxify => true, :asset_types => @asset_types, :for_content => false } %>
+<%= render :partial => 'browser', :locals => { :asset_types => @asset_types, :for_content => false } %>
 </div>
 
 <% content_for :sub_content do  %>

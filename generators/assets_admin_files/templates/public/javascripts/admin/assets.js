@@ -1,11 +1,10 @@
 var AssetBrowser = Class.create({
-  initialize: function(grouping, folder, for_content, ajax) {
+  initialize: function(grouping, folder, for_content) {
     AssetBrowser.current_grouping = grouping;
     AssetBrowser.dl = $('asset-browser');
     AssetBrowser.setContentNodeForm('has-assets-form');
     AssetBrowser.dts = AssetBrowser.dl.select('dt');
     AssetBrowser.open_folder = folder;
-    AssetBrowser.ajax = (ajax || false);
     AssetBrowser.for_content = (for_content || false);
         
     AssetBrowser.dts.each(function(dt) {
@@ -15,7 +14,7 @@ var AssetBrowser = Class.create({
         dt.onclick = function() {
           AssetBrowser.closeInfo();
 
-          if(AssetBrowser.ajax && !this.dd.visible() && !dt.dd.down('ul li'))
+          if(!this.dd.visible() && !dt.dd.down('ul li'))
             AssetBrowser.loadFilesByFolder(dt.innerHTML, dt.dd.down('ul').id);
 
 
@@ -105,7 +104,7 @@ Object.extend(AssetBrowser, {
   },
   
   loadFilesByFolder: function(folder_name, folder_id){
-      new Ajax.Request('/admin/assets/category', { method: 'get',
+      new Ajax.Request('/admin/assets/' + this.current_grouping.replace(/$by_/, ''), { method: 'get',
                                                      asynchronous:true, 
                                                      parameters: { for_content: AssetBrowser.for_content, format: 'html', category: folder_name, authenticity_token: AJ.authenticity_token() },
                                                      onSuccess: function(response){ $(folder_id).update(response.responseText); } } );
