@@ -151,8 +151,9 @@ Object.extend(AssetBrowser, {
       this.contentNodeForm.addAssetIDs = function() {
         $$('input.asset_id').invoke('remove');
         assets = $$('#asset-list li');
+        
         if (assets.size() == 0) {
-            $(this).insert('<input type="hidden" name="' + this.model_name + '[asset_ids]" value="" />');
+            $(this).insert('<input type="hidden" name="' + this.model_name + '[asset_ids]" class="asset_id" value="" />');
         } else {
           assets.each(function(li) {
             asset_id = li.id.split('-').last();
