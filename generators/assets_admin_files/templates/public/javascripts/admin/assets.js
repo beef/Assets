@@ -104,7 +104,7 @@ Object.extend(AssetBrowser, {
   },
   
   loadFilesByFolder: function(folder_name, folder_id){
-      new Ajax.Request('/admin/assets/' + this.current_grouping.replace(/$by_/, ''), { method: 'get',
+      new Ajax.Request('/admin/assets/' + this.current_grouping.replace(/^by_/, ''), { method: 'get',
                                                      asynchronous:true, 
                                                      parameters: { for_content: AssetBrowser.for_content, format: 'html', category: folder_name, authenticity_token: AJ.authenticity_token() },
                                                      onSuccess: function(response){ $(folder_id).update(response.responseText); } } );
