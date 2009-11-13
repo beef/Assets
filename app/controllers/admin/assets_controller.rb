@@ -83,6 +83,7 @@ class Admin::AssetsController < Admin::BaseController
 
     respond_to do |format|
       format.js
+      format.json { render :json => @asset }
       format.xml  { render :xml => @asset }
     end
   end
