@@ -1,4 +1,6 @@
 class Admin::FlickrsController < Admin::BaseController
+  helper AssetsHelper
+  
   def create
     flickr = Flickr.new("#{RAILS_ROOT}/config/flickr.yml")
     redirect_to flickr.auth.url(:write)

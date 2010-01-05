@@ -51,4 +51,8 @@ module Admin::AssetsHelper
     return unless defined?(Flickr) and File.exists?("#{RAILS_ROOT}/config/flickr.yml") and !Settings.flickr_user_id.blank?
     render :partial => 'admin/flickrs/selector'
   end
+  
+  def flickr_default_size
+    defined?(Beef::Has::Assets::FLICKR_DEFAULT_SIZE) ?  Beef::Has::Assets::FLICKR_DEFAULT_SIZE : :medium 
+  end
 end
