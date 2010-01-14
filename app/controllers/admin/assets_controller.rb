@@ -41,7 +41,7 @@ class Admin::AssetsController < Admin::BaseController
   end
 
   def category
-    @assets = Asset.all(:conditions => ["category = ?",params[:category]])
+    @assets = Asset.all(:conditions => ["category = ?",params[:category].rstrip])
 
     respond_to do |format|
       format.html { render :layout => false}
