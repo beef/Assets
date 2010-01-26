@@ -1,6 +1,6 @@
 class Admin::AssetsController < Admin::BaseController
   unloadable
-  
+
   protect_from_forgery :except => [:destroy, :rename_category]
 
   # GET /assets
@@ -15,9 +15,9 @@ class Admin::AssetsController < Admin::BaseController
       format.js { render :action => 'index'}
     end
   end
-  
+
   alias :by_category :index
-  
+
   def by_content_type
     @asset_types = Asset.grouped_by_content_type
     @grouping = 'by_content_type'
@@ -28,7 +28,7 @@ class Admin::AssetsController < Admin::BaseController
       format.js { render :action => 'index'}
     end
   end
-  
+
   def by_description
     @asset_types = Asset.grouped_by_description
     @grouping = 'by_description'
@@ -59,18 +59,18 @@ class Admin::AssetsController < Admin::BaseController
       format.js { render :layout => false, :action => 'category'}
     end
   end
-  
+
   def descriptions
     @descriptions = Asset.not_thumbnails.find(:all, :select => 'description', :group => 'description', :order => 'description', :conditions => 'description IS NOT NULL')
-    
+
     respond_to do |format|
       format.json { render :json => @descriptions.collect{ |a| a.description }}
     end
   end
-  
+
   def categories
     @categories = Asset.not_thumbnails.find(:all, :select => 'category', :group => 'category', :order => 'category', :conditions => 'category IS NOT NULL')
-    
+
     respond_to do |format|
       format.json { render :json => @categories.collect{ |a| a.category }}
     end
@@ -87,6 +87,7 @@ class Admin::AssetsController < Admin::BaseController
       format.xml  { render :xml => @asset }
     end
   end
+  alias :attach :show
 
   # POST /assets
   # POST /assets.xml
@@ -127,7 +128,7 @@ class Admin::AssetsController < Admin::BaseController
       end
     end
   end
-  
+
   def select_thumbnail
     @asset = Asset.find(params[:id])
     respond_to do |wants|
@@ -135,7 +136,7 @@ class Admin::AssetsController < Admin::BaseController
       wants.js
     end
   end
-  
+
   def replace_thumbnail
     @asset = Asset.find(params[:id])
     @asset.create_or_update_thumbnail(params[:asset][:uploaded_data],:square,Asset.attachment_options[:thumbnails][:square])
@@ -146,15 +147,15 @@ class Admin::AssetsController < Admin::BaseController
       end
       format.js { render :json => @asset, :status => 200 }
     end
-    
+
   rescue Technoweenie::AttachmentFu::ThumbnailError => m
-    
+
     respond_to do |format|
       format.html { flash[:error] = m }
       format.js { render :json => [m] }
     end
   end
-  
+
   def rename_category
     respond_to do |format|
       format.js do

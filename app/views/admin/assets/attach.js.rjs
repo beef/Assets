@@ -1,0 +1,4 @@
+list_id = "#{@asset.is_image? ? 'gallery' : 'downloads' }-list"
+page.insert_html :bottom, list_id, content_tag( :li, render( :partial => "admin/assets/#{@asset.is_image? ? 'image' : 'document' }", :locals => { :asset => @asset, :for_content => false } ), :id => "asset-#{@asset.id}", :class => @asset.content_type.gsub('/','-') )
+page.show(list_id)
+page << "AssetBrowser.setUpAssetList();"

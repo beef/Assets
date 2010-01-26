@@ -1,6 +1,6 @@
-<h2><%= content_node.class.name.titleize %> Files</h2>
-<ul class="asset-list" id="asset-list">
-<% for asset in content_node.assets -%>
+<h2><%= content_node.class.name.titleize %> <%= title %></h2>
+<ul class="asset-list" id="<%= title.parameterize %>-list">
+<% for asset in assets -%>
   <li id="asset-<%= asset.id %>" class="<%= asset.content_type.gsub('/','-') %>">
 <% if asset.content_type =~ /image/ -%>
     <%= render :partial => "admin/assets/image", :locals => { :asset => asset, :for_content => false } %>
@@ -8,5 +8,5 @@
     <%= render :partial => "admin/assets/document", :locals => { :asset => asset, :for_content => false } %>
 <% end -%>
   </li>
-<% end -%> 
+<% end -%>
 </ul>

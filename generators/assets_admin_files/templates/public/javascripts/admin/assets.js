@@ -150,7 +150,7 @@ Object.extend(AssetBrowser, {
       this.setUpAssetList();
       this.contentNodeForm.addAssetIDs = function() {
         $$('input.asset_id').invoke('remove');
-        assets = $$('#asset-list li');
+        assets = $$('#attach-asset-list li');
         
         if (assets.size() == 0) {
             $(this).insert('<input type="hidden" name="' + this.model_name + '[asset_ids]" class="asset_id" value="" />');
@@ -174,89 +174,13 @@ Object.extend(AssetBrowser, {
   },
   
   setUpAssetList: function() {
-    this.assetList = $('asset-list');
-    if (this.assetList) {
-      Sortable.create(this.assetList);
-    }
-    this.contentNodeForm.assetList = this.assetList;
+    Sortable.create('gallery-list');
+    Sortable.create('downloads-list');
   },
 
   addAssetToContentNode: function(asset) {
-    if (!this.assetList) {
-    $('attach-asset-list').insert({top:'<h2 class="drop-down open">' + this.contentNodeForm.model_name.charAt(0).toUpperCase() + this.contentNodeForm.model_name.slice(1).toLowerCase() + ' Files</h2><ul class="asset-list" id="asset-list"></ul>'});
-      this.setUpAssetList();
-    }
-
-    this.assetList.show();
     if (!$('asset-' + asset.id)) {
-      
-      if(/image/.test(asset.content_type)){
-        li = new Element('li', { 'class': asset.content_type.replace('/','-'), id: 'asset-' + asset.id }).update('<img alt=\"' + asset.filename + '\" src=\"' + asset.sizes.find(function(size){ return size[0] == 'square'; })[1] + '\" />');
-      } else {
-        li = new Element('li', { 'class': asset.content_type.replace('/','-'), id: 'asset-' + asset.id }).update(asset.filename + ' ' + asset.description);
-      }
-
-      filename = new Element('h4').update(asset.filename);
-      div = new Element('div');
-      h4 = new Element('h4').update("Insert Image");
-      view_info = new Element('a').update('View Info');
-    
-      view_info.onclick = function() {
-        AssetBrowser.openInfo(asset.id, this);
-        return false;
-      };
-
-      insert_image_large = new Element('a').update('Large | ');
-      insert_image_medium = new Element('a').update('Medium | ');
-      insert_image_small = new Element('a').update('Small');
-    
-      insert_image_large.onclick = function() {
-        addAsset(asset.id, 'large' );
-        return false;
-      };
-      insert_image_medium.onclick = function() {
-        addAsset(asset.id, 'medium' );
-        return false;
-      };
-      insert_image_small.onclick = function() {
-        addAsset(asset.id, 'thumb' );
-        return false;
-      };
-      insert_document = new Element('a').update(' | Insert');
-    
-      var theForm = this.contentNodeForm;
-    
-      deleter = new Element('a').update('Detach');
-        deleter.onclick = function() {
-        AssetBrowser.removeAssetFromContentNode(asset.id);
-        return false;
-      };
-    
-      div.insert(filename);
-      div.insert(view_info);
-      div.insert('<br/>');
-      div.insert(deleter);
-
-      li.insert(div);
-      
-      if (/image/.test(asset.content_type)) {
-        //setup for images
-        div.insert(h4);
-        div.insert(insert_image_large);
-        div.insert(insert_image_medium);
-        div.insert(insert_image_small);
-
-      } else {
-        //setup for documents
-        insert_document.onclick = function() {
-          addAsset(asset.id);
-          return false;
-        };
-        div.insert(insert_document);
-      }
-
-      this.assetList.insert(li);    
-      this.setUpAssetList();
+      new Ajax.Request('/admin/assets/'+asset.id+'/attach');
     }
   },
 
@@ -307,7 +231,7 @@ Event.observe(window, 'load', function() {
       flash_url : '/flash/swfupload.swf',
       file_post_name: 'asset[uploaded_data]', 
 
-      file_size_limit : '5 MB',
+      file_size_limit : '7 MB',
       file_upload_limit : 0,
 
       file_queue_error_handler : UploadHandler.fileQueueError,
