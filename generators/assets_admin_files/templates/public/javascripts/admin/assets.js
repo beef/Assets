@@ -221,8 +221,9 @@ Object.extend(AssetBrowser, {
 var swfu;
 Event.observe(window, 'load', function() {
   if ($('asset-browser')) {
+    file_size_limit = '7 MB';
     form = $('asset-upload-form');
-    form.insert({after: '<div id="flash-button"></div>'});
+    form.insert({after: '<div id="flash-button"></div><span>upto ' + file_size_limit + '</span>'});
     js_path =  form.action.split('?').join('.js?');
     swfu = new SWFUpload({
       // Create the custom swfupload_photos_path in the routes.rb file
@@ -231,7 +232,7 @@ Event.observe(window, 'load', function() {
       flash_url : '/flash/swfupload.swf',
       file_post_name: 'asset[uploaded_data]', 
 
-      file_size_limit : '7 MB',
+      file_size_limit : file_size_limit,
       file_upload_limit : 0,
 
       file_queue_error_handler : UploadHandler.fileQueueError,

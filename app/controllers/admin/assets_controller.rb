@@ -43,7 +43,7 @@ class Admin::AssetsController < Admin::BaseController
   def category
     category = params[:category].strip
     if category == 'No Folder'
-      conditions = "category IS NULL or category = ''"
+      conditions = "category IS NULL OR category = '' OR category = 'No Folder'"
     else
       conditions = ["category = ?", category]
     end
