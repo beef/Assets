@@ -1,3 +1,4 @@
 page.replace_html 'flickr-image-container', :partial => 'admin/flickrs/photo', :collection => @flickr_result
-page.insert_html :bottom, 'flickr-image-container', link_to_remote( '< Previous', :url => admin_flickrs_path(:page => @flickr_result.page - 1), :method => :get) unless @flickr_result.page == 1
-page.insert_html :bottom, 'flickr-image-container', link_to_remote( 'Next >', :url => admin_flickrs_path(:page => @flickr_result.page + 1), :method => :get) unless @flickr_result.page == @flickr_result.pages
+page.insert_html :bottom, 'flickr-image-container', '<div id="flickr-pagination"></div>'
+page.insert_html :bottom, 'flickr-pagination', link_to_remote( '< Previous', :url => admin_flickrs_path(:page => @flickr_result.page - 1), :method => :get) unless @flickr_result.page == 1
+page.insert_html :bottom, 'flickr-pagination', link_to_remote( 'Next >', :url => admin_flickrs_path(:page => @flickr_result.page + 1), :method => :get) unless @flickr_result.page == @flickr_result.pages
