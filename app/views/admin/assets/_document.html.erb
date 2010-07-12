@@ -1,17 +1,17 @@
 <% attached = (controller.action_name == 'attach' or controller.controller_name != 'assets') %>
 <%= link_to_function truncate(asset.filename,{:length => 50}), "AssetBrowser.openInfo(#{asset.id}, this)" %> - <%= asset.description %>
 <div>
-<%= link_to_function "View Info", "AssetBrowser.openInfo(#{asset.id}, this)" %><br/>
+<%= link_to_function "View Info", "AssetBrowser.openInfo(#{asset.id}, this)", :title => "View and update information for this file." %><br/>
 
 <% if for_content or attached %>
-  <%= link_to_function "Insert", "addAsset(#{asset.id})" %><br />
+  <%= link_to_function "Insert", "addAsset(#{asset.id})", :title => "Insert a link to this file into the currently active text area on the left." %><br />
 <% end -%>
 <br/>
 <% if for_content %>
-  <%= link_to_function "Attach", "AssetBrowser.addAssetToContentNode(#{asset.to_json}.#{asset.class.name.demodulize.underscore})" %>
+  <%= link_to_function "Attach", "AssetBrowser.addAssetToContentNode(#{asset.to_json}.#{asset.class.name.demodulize.underscore})", :title => "Show this file in the current page's downloads list." %>
 <% elsif attached %>
-  <%= link_to_function "Detach", "AssetBrowser.removeAssetFromContentNode(#{asset.id})" %>
+  <%= link_to_function "Detach", "AssetBrowser.removeAssetFromContentNode(#{asset.id})", :title => "Remove this file from the current page, still available to other pages." %>
 <% else %>
-  <%= link_to_function "Delete", "AssetBrowser.assetAction(#{asset.to_json}.#{asset.class.name.demodulize.underscore})" %>
+  <%= link_to_function "Delete", "AssetBrowser.assetAction(#{asset.to_json}.#{asset.class.name.demodulize.underscore})", :title => "Totally delete this file from all pages of the website, not undo-able" %>
 <% end -%>
 </div>

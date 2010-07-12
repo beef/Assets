@@ -1,4 +1,4 @@
 <ul class="choices">
-  <li><%= link_to 'Browse folders', by_category_admin_assets_path, :id => 'toggle-grouping', :onclick => 'AssetBrowser.reload("by_category"); return false;' %></li>
-  <li><%= link_to 'Group by file type', by_content_type_admin_assets_path, :id => 'toggle-grouping', :onclick => 'AssetBrowser.reload("by_content_type"); return false;' %></li>
+  <li><%= link_to 'Browse folders', by_category_admin_assets_path, :id => 'toggle-grouping', :onclick => 'AssetBrowser.reload("by_category"); return false;', :title => 'Organise the assets by folder' %></li>
+  <li><%= link_to 'Group by file type', by_content_type_admin_assets_path, :id => 'toggle-grouping', :onclick => 'AssetBrowser.reload("by_content_type"); return false;', :title => 'Organise the assets by file type (by jpegs, gifs, pngs etc)' %></li>
 </ul>
