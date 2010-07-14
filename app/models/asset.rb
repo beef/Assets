@@ -3,7 +3,7 @@ class Asset < ActiveRecord::Base
                  :path_prefix => 'public/assets',
                  :max_size => 7.megabytes,
                  :resize_to => '900',
-                 :thumbnails => { :large => '480x480', :medium => '230x230', :thumb => '184', :square => '75x75!' }
+                 :thumbnails => { :large => '480x480', :medium => '230x230', :thumb => '184x184', :square => '75x75!' }
                  
   has_many :assetings, :dependent => :delete_all
   belongs_to :assetable, :polymorphic => true
