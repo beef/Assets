@@ -315,18 +315,23 @@ var Holdable = Class.create({
 
 var Renameable = Class.create(Holdable, {
   firer: function(elem) {
+    
+    // if there is already an input in here, bail
+    if(elem.down('input') || elem.hasClassName('no-folder'))
+      return;
+
     this.text_input = new Element('input', { href: 'text', value: elem.innerHTML }); 
     elem.update(this.text_input);
     this.text_input.focus();
     this.text_input.observe('blur', function() {
       this.replace(this.value);
-    });
+    }.bind(this.text_input));
     this.text_input.observe('change', function() {
       asset_id = elem.id.split('-').last();
       new Ajax.Request('/admin/assets/' + asset_id + '/rename_category' , {
         parameters: { name: this.value  }
       });
-    });
+    }.bind(this.text_input));
   } 
 });
 var flickr_load_select = function(){
