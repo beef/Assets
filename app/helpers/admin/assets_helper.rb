@@ -22,8 +22,9 @@ module Admin::AssetsHelper
   end
 
   def admin_assets_path_with_session_information
+    logger.debug "Nom Nom #{cookies.to_hash.compact.inspect}"
     session_key = ActionController::Base.session_options[:key]
-    params = {request_forgery_protection_token => form_authenticity_token, :cookies => cookies}
+    params = {request_forgery_protection_token => form_authenticity_token, :cookies => cookies.reject{ |k,v| k.nil? } }
     admin_assets_path(params)
   end
 
